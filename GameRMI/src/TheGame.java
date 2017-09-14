@@ -5,13 +5,12 @@ import java.util.Iterator;
 import java.util.Vector;
 
 public class TheGame implements GameInterface {
-    
+
     private int number = 0;
     private String gameState = null;
     private boolean gameOver = true;
     public Vector<ChatInterface> clients= new Vector<ChatInterface>();
-    
-   
+
     public TheGame ()
     {
         super();
@@ -19,23 +18,23 @@ public class TheGame implements GameInterface {
 
     @Override
     public void gameOverNotify() throws RemoteException {
-        
+
         this.gameOver = true;
         this.gameState = "\n >> !!! This game is over. The right number was " + this.number +" !!! \n";
-        
+
         if(this.clients.size() >= 0)
         {
             for (ChatInterface ch : this.clients)
             {
                 ch.send(gameState);
-            }            
+            }
 
         }
     }
 
     @Override
     public String newMove(int guess) throws RemoteException {
-        
+
         if(guess < this.number)
         {
             return " >> The number is bigger, than you've guessed.";
@@ -50,14 +49,14 @@ public class TheGame implements GameInterface {
             return " >> \t !!! CONGRATULATIONS, YOU WON !!! \n";
         }
     }
-    
+
     private int randomizeNumber()
     {
         this.number  = 1 + (int)(Math.random() * ((100 - 1) + 1));
         System.out.println(" >> The number is: " + this.number);
         return this.number;
     }
-    
+
     @Override
     public void startGame() throws RemoteException
     {
@@ -65,17 +64,14 @@ public class TheGame implements GameInterface {
         {
             this.gameOver = false;
             this.gameState = " >> A new game has been started. \n";
-            
+
             if(this.clients.size() >= 0)
             {
-                
                 for (ChatInterface ch : this.clients)
                 {
                     ch.send(gameState);
                 }
-
             }
-            
             randomizeNumber();
         }
     }
@@ -98,5 +94,5 @@ public class TheGame implements GameInterface {
                 }
             }
     }
-    
+
  }

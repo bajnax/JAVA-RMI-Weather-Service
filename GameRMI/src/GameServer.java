@@ -7,7 +7,6 @@ public class GameServer
 {
     public static void main (String[] argv)
     {
-
         try
         {
             // Instantiating the implementation class
@@ -23,7 +22,7 @@ public class GameServer
 
             System.out.println("The game server is ready.");
 
-        }catch (Exception e)
+        } catch (Exception e)
         {
             System.out.println("The game server failed to start: " + e);
             e.printStackTrace();
